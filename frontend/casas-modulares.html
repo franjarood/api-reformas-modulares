@@ -1,0 +1,304 @@
+<!-- ===============================================================
+     PROYECTO: Empresa de Reformas y Casas Modulares
+     ARCHIVO: casas-modulares.html
+     DESCRIPCIÓN:
+       Página dedicada a la presentación de proyectos y modelos de
+       casas modulares, destacando su diseño, eficiencia y sostenibilidad.
+
+     OBJETIVOS:
+       - Mostrar proyectos destacados con imágenes y descripciones.
+       - Incluir tablas comparativas de rendimiento y eficiencia.
+       - Añadir galería con efecto lightbox sin uso de JavaScript.
+
+     TECNOLOGÍAS:
+       - HTML5 semántico
+       - CSS externo: estilos-unificado.css
+================================================================ -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Casas Modulares | ReformasModulares</title>
+
+  <!-- Enlace a la hoja de estilos unificada -->
+  <link href="estilos-unificado.css" rel="stylesheet" />
+
+  <!-- Fuente importada desde Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+
+<!-- ===============================================================
+     CLASE DE TEMA:
+     "tema-casas" activa las variables CSS verdes (sostenibilidad).
+================================================================ -->
+<body class="tema-casas">
+
+  <!-- ===============================================================
+       HEADER / NAVEGACIÓN PRINCIPAL
+       ---------------------------------------------------------------
+       Barra de navegación coherente con el resto del sitio web.
+       Permite acceso rápido a Reformas, Casas Modulares y Contacto.
+  =============================================================== -->
+  <header class="navbar">
+    <div class="logo">
+      <!-- Logotipo corporativo -->
+      <img src="https://www.freepnglogos.com/uploads/logo-home-png/logo-lake-county-home-show-april-lake-county-24.png" 
+           alt="Logo de la empresa" />
+      <span>Reformas y Casas Modulares</span>
+    </div>
+
+    <!-- Menú principal -->
+    <ul class="nav-menu">
+      <li><a href="index.html">Inicio</a></li>
+
+      <!-- Dropdown reutilizando el checkbox hack -->
+      <li class="dropdown">
+        <input type="checkbox" id="toggle-reformas" hidden>
+        <label for="toggle-reformas" class="dropbtn">Reformas</label>
+        <ul class="dropdown-content">
+          <li><a href="reformas.html#cocinas">Cocinas</a></li>
+          <li><a href="reformas.html#banos">Baños</a></li>
+          <li><a href="reformas.html#fachadas">Fachadas</a></li>
+          <li><a href="reformas.html#integrales">Reformas integrales</a></li>
+        </ul>
+      </li>
+
+      <!-- Página activa -->
+      <li><a href="casas-modulares.html" class="active">Casas modulares</a></li>
+    </ul>
+  </header>
+
+  <!-- ===============================================================
+       MAIN: CONTENIDO PRINCIPAL
+       ---------------------------------------------------------------
+       Estructura dividida en:
+         1. Hero con botones CTA
+         2. Bloque de proyectos destacados
+         3. Bloque de tablas comparativas
+         4. Galería de imágenes con lightbox
+  =============================================================== -->
+  <main class="container">
+
+    <!-- ==================== SECCIÓN HERO ==================== -->
+    <!-- Hero con fondo verde translúcido, enfatizando ecología -->
+    <section class="hero hero-casas">
+      <h1>Tu hogar modular, ecológico y a medida</h1>
+      <p>Fabricamos casas modulares sostenibles, eficientes y con un diseño moderno.</p>
+
+      <!-- Botones de navegación interna -->
+      <a href="#proyectos" class="btn">Ver proyectos destacados</a>
+      <a href="#galeria" class="btn">Descubre nuestra galería</a>
+    </section>
+
+    <!-- ===============================================================
+         SECCIÓN: PROYECTOS DESTACADOS
+         ---------------------------------------------------------------
+         Estructura tipo grid para mostrar proyectos con imagen,
+         título y descripción. Diseñada con flexibilidad responsive.
+    =============================================================== -->
+    <section id="proyectos" class="proyectos-destacados">
+      <div class="proyectos-header">
+        <h2>Nuestros proyectos destacados</h2>
+        <p>Diseñamos y construimos espacios modulares con personalidad, combinando innovación, eficiencia y estilo contemporáneo.</p>
+      </div>
+
+      <!-- Contenedor grid de tarjetas de proyecto -->
+      <div class="proyectos-grid">
+
+        <!-- -------- PROYECTO 1 -------- -->
+        <article class="proyecto-card">
+          <img src="https://anboc.es/wp-content/uploads/2022/10/casa-montcau.jpg" 
+               alt="Casa modular ecológica" />
+          <div class="proyecto-info">
+            <h3>Casa Modular Ecológica</h3>
+            <p>Eficiencia energética y materiales sostenibles para un hogar con huella verde.</p>
+          </div>
+        </article>
+
+        <!-- -------- PROYECTO 2 -------- -->
+        <article class="proyecto-card">
+          <img src="https://premiergreenhome.com/wp-content/uploads/2024/11/Casa-contenedor.jpg" 
+               alt="Casa contenedor minimalista" />
+          <div class="proyecto-info">
+            <h3>Contenedor Minimalista</h3>
+            <p>Diseño compacto, funcional y elegante, ideal para entornos naturales o urbanos.</p>
+          </div>
+        </article>
+
+        <!-- -------- PROYECTO 3 -------- -->
+        <article class="proyecto-card">
+          <img src="https://eurocasas.com/wp-content/uploads/2023/03/slide_gran-villa_2-1024x683.webp" 
+               alt="Casa modular familiar moderna" />
+          <div class="proyecto-info">
+            <h3>Casa Familiar Moderna</h3>
+            <p>Espacios amplios y modulares que crecen contigo y tu familia.</p>
+          </div>
+        </article>
+
+        <!-- -------- PROYECTO 4 -------- -->
+        <article class="proyecto-card">
+          <img src="https://casasinhaus.com/wp-content/uploads/2021/10/casas-de-lujo-en-espana.jpg" 
+               alt="Casa modular de lujo con diseño contemporáneo" />
+          <div class="proyecto-info">
+            <h3>Casa Modular Premium</h3>
+            <p>Arquitectura contemporánea, acabados de lujo y tecnología inteligente para una experiencia de confort total.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===============================================================
+         BLOQUE DE TABLAS COMPARATIVAS
+         ---------------------------------------------------------------
+         Se usan dos tablas paralelas (rendimiento y eficiencia técnica).
+         Estructura pensada para mostrar información cuantitativa
+         de forma legible, con <caption>, <thead> y <tbody>.
+    =============================================================== -->
+    <section class="bloque-tablas">
+      <h2>Datos y comparativas</h2>
+      <p>Resultados de nuestros principales modelos modulares en 2024: rendimiento, satisfacción y eficiencia energética.</p>
+
+      <!-- Contenedor de dos tablas -->
+      <div class="tablas-dobles">
+
+        <!-- -------- TABLA 1: RENDIMIENTO -------- -->
+        <table class="tabla-elegante">
+          <caption>Rendimiento por tipo de vivienda</caption>
+          <thead>
+            <tr>
+              <th>Proyecto</th>
+              <th>Duración (semanas)</th>
+              <th>Satisfacción</th>
+              <th>Ahorro energético</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Casa Modular Ecológica</td>
+              <td>6</td>
+              <td>98%</td>
+              <td>35%</td>
+            </tr>
+            <tr>
+              <td>Contenedor Minimalista</td>
+              <td>5</td>
+              <td>96%</td>
+              <td>28%</td>
+            </tr>
+            <tr>
+              <td>Casa Familiar Moderna</td>
+              <td>8</td>
+              <td>94%</td>
+              <td>32%</td>
+            </tr>
+            <tr>
+              <td>Casa Modular Premium</td>
+              <td>10</td>
+              <td>99%</td>
+              <td>40%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- -------- TABLA 2: EFICIENCIA TÉCNICA -------- -->
+        <table class="tabla-elegante">
+          <caption>Comparativa técnica y eficiencia</caption>
+          <thead>
+            <tr>
+              <th>Modelo</th>
+              <th>Superficie (m²)</th>
+              <th>Precio (€)</th>
+              <th>Eficiencia</th>
+              <th>Entrega</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Casa Modular Ecológica</td>
+              <td>60</td>
+              <td>78.000</td>
+              <td>A++</td>
+              <td>9 sem.</td>
+            </tr>
+            <tr>
+              <td>Contenedor Minimalista</td>
+              <td>45</td>
+              <td>64.000</td>
+              <td>A+</td>
+              <td>8 sem.</td>
+            </tr>
+            <tr>
+              <td>Casa Familiar Moderna</td>
+              <td>110</td>
+              <td>122.000</td>
+              <td>A++</td>
+              <td>12 sem.</td>
+            </tr>
+            <tr>
+              <td>Casa Modular Premium</td>
+              <td>150</td>
+              <td>175.000</td>
+              <td>A+++</td>
+              <td>14 sem.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===============================================================
+         GALERÍA DE IMÁGENES CON LIGHTBOX
+         ---------------------------------------------------------------
+         Muestra miniaturas que se amplían al hacer clic. El efecto
+         lightbox se consigue únicamente con CSS y anclas (<a href="#img1">).
+    =============================================================== -->
+    <section class="galeria-casas" id="galeria">
+      <h2>Galería de proyectos</h2>
+      <p class="galeria-descripcion">
+        Diseños modulares que combinan sostenibilidad, elegancia y tecnología.
+      </p>
+
+      <!-- Grid de miniaturas (responsive con auto-fit) -->
+      <div class="galeria-grid">
+        <a href="#img1"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Casa modular 1"></a>
+        <a href="#img2"><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80" alt="Casa modular 2"></a>
+        <a href="#img3"><img src="https://images.unsplash.com/photo-1572120360610-d971b9d7767c?auto=format&fit=crop&w=800&q=80" alt="Casa modular 3"></a>
+      </div>
+
+      <!-- Estructura del lightbox: cada imagen se muestra en pantalla completa
+           al activarse su ID correspondiente mediante :target -->
+      <div class="lightbox" id="img1">
+        <a href="#" class="cerrar"></a>
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=90" alt="Vista ampliada de casa modular 1" />
+      </div>
+
+      <div class="lightbox" id="img2">
+        <a href="#" class="cerrar"></a>
+        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1400&q=90" alt="Vista ampliada de casa modular 2" />
+      </div>
+
+      <div class="lightbox" id="img3">
+        <a href="#" class="cerrar"></a>
+        <img src="https://images.unsplash.com/photo-1572120360610-d971b9d7767c?auto=format&fit=crop&w=1400&q=90" alt="Vista ampliada de casa modular 3" />
+      </div>
+    </section>
+  </main>
+
+  <!-- ===============================================================
+       FOOTER / PIE DE PÁGINA
+       ---------------------------------------------------------------
+       Elemento coherente con el resto del sitio.
+       Incluye contacto con correo enlazado y teléfono.
+  =============================================================== -->
+  <footer>
+    <p>
+      Contacto:
+      <a href="mailto:info@reformasmodulares.com" style="color:inherit; text-decoration:underline;">
+        info@reformasmodulares.com
+      </a>
+      | Tel: 123 456 789
+    </p>
+  </footer>
+</body>
+</html>

@@ -39,13 +39,18 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error(err.detail || "Error enviando el mensaje");
       }
 
-      msgEl.textContent = " Mensaje enviado. Te contactaremos pronto.";
-      msgEl.style.color = "green";
+      msgEl.textContent = "Mensaje enviado. Te contactaremos pronto.";
+      msgEl.style.color = "white";
+      msgEl.style.background = "#27ae60";
+      msgEl.style.padding = "10px";
+      msgEl.style.borderRadius = "6px";
+      msgEl.style.textAlign = "center";
       form.reset();
 
     } catch (err) {
-      msgEl.textContent = " No se pudo enviar. Inténtalo de nuevo.";
-      msgEl.style.color = "crimson";
+      msgEl.textContent = "No se pudo enviar. Inténtalo de nuevo.";
+      msgEl.style.background = "#c0392b";
+
 
     } finally {
     if (submitBtn) {

@@ -1,5 +1,6 @@
 const API_BASE_URL = window.API_BASE_URL || "http://127.0.0.1:8000";
 
+console.log("API_BASE_URL =", API_BASE_URL);
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector(".form-contacto");
@@ -17,6 +18,18 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    const msgEl = document.getElementById("formMsg");
+    msgEl.textContent = "";
+    msgEl.style.color = "";
+
+    const submitBtn = form.querySelector('input[type="submit"], button[type="submit"]');
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      if (submitBtn.tagName === "INPUT") submitBtn.value = "Enviando...";
+      else submitBtn.textContent = "Enviando...";
+    }
+
+
     try {
       const res = await fetch(`${API_BASE_URL}/leads`, {
         method: "POST",
@@ -29,12 +42,21 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error(err.detail || "Error enviando el mensaje");
       }
 
-      // OK
-      alert("✅ Mensaje enviado. Te responderemos lo antes posible.");
+      msgEl.textContent = " Mensaje enviado. Te contactaremos pronto.";
+      msgEl.style.color = "green";
       form.reset();
+
     } catch (err) {
-      alert("❌ No se pudo enviar el mensaje: " + err.message);
-      console.error(err);
+      msgEl.textContent = " No se pudo enviar. Inténtalo de nuevo.";
+      msgEl.style.color = "crimson";
+
+    } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      if (submitBtn.tagName === "INPUT") submitBtn.value = "Enviar solicitud";
+      else submitBtn.textContent = "Enviar solicitud";
+    }
+
     }
   });
 });

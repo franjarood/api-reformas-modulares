@@ -1,5 +1,6 @@
 const API_BASE_URL = window.API_BASE_URL || "http://127.0.0.1:8000";
 
+
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector(".form-contacto");
 
@@ -23,10 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const submitBtn = form.querySelector('input[type="submit"], button[type="submit"]');
     if (submitBtn) {
       submitBtn.disabled = true;
-      if (submitBtn.tagName === "INPUT") submitBtn.value = "Enviando...";
-      else submitBtn.textContent = "Enviando...";
+      submitBtn.value ? (submitBtn.value = "Enviando...") : (submitBtn.textContent = "Enviando...");
     }
-
 
     try {
       const res = await fetch(`${API_BASE_URL}/leads`, {
@@ -51,8 +50,9 @@ document.addEventListener("DOMContentLoaded", () => {
     } finally {
     if (submitBtn) {
       submitBtn.disabled = false;
-      if (submitBtn.tagName === "INPUT") submitBtn.value = "Enviar solicitud";
-      else submitBtn.textContent = "Enviar solicitud";
+      submitBtn.value
+        ? (submitBtn.value = "Enviar solicitud")
+        : (submitBtn.textContent = "Enviar");
     }
 
     }

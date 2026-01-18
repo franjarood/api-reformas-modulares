@@ -26,7 +26,7 @@ Este proyecto está dividido en dos partes:
 - Diseño moderno y responsive
 - Simulación de una empresa real
 - Preparada para consumir datos desde una API REST
-
+- **Validación avanzada de formularios** (email, teléfono y presupuesto)
 ###  Back-end
 - API REST desarrollada en **Python con FastAPI**
 - Endpoints para:
@@ -97,27 +97,32 @@ Este proyecto está dividido en dos partes:
 
 ## Endpoints principales de la API
 
-| Método | Endpoint | Descripción |
-|------|---------|------------|
-| GET | `/health` | Comprobación de estado |
-| GET | `/models` | Lista de modelos de casas |
-| GET | `/options` | Lista de materiales y extras |
-| POST | `/budget` | Cálculo de presupuesto |
-| POST | `/requests` | Crear solicitud de cliente |
-| GET | `/requests` | Listar solicitudes |
-| GET | `/requests/{id}` | Obtener solicitud por ID |
-| GET | `/requests?email=` | Filtrar solicitudes por email |
+| Método | Endpoint                      | Descripción                                        |
+| ------ | ----------------------------- | -------------------------------------------------- |
+| GET    | `/health`                     | Comprobación de estado de la API                   |
+| GET    | `/models`                     | Listado de modelos de casas modulares              |
+| GET    | `/options`                    | Listado de materiales y extras disponibles         |
+| POST   | `/configurations/calculate`   | Cálculo de presupuesto a partir de modelo y extras |
+| POST   | `/configurations`             | Crear y guardar una configuración de presupuesto   |
+| GET    | `/configurations`             | Listar todas las configuraciones guardadas         |
+| GET    | `/configurations/{config_id}` | Obtener una configuración concreta por ID          |
+| GET    | `/leads`                      | Listar solicitudes de contacto (leads)             |
+| POST   | `/leads`                      | Crear una nueva solicitud de contacto              |
+| GET    | `/`                           | Endpoint raíz de la API                            |
+
+La documentación completa de la API se genera automáticamente mediante Swagger y está disponible en `/docs`.
 
 
 
 ## Objetivos cumplidos
 
-- Uso de Front-end y Back-end  
-- API REST propia  
-- Documentación con Swagger  
-- Simulación de proyecto real  
-- Código entendible y progresivo  
-- Aprendizaje paso a paso  
+-Uso de Front-end y Back-end
+-API REST propia
+-Consumo de API desde JavaScript
+-Validación avanzada de formularios
+-Documentación con Swagger
+-Simulación de proyecto real
+-Aprendizaje progresivo paso a paso  
 
 ## Notas finales:
 Este proyecto está enfocado a aprendizaje, no a producción.

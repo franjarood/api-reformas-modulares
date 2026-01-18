@@ -13,7 +13,10 @@
   font-size: 0.95rem;
 }
 
-/* ----- Bloque general "Extras" ----- */
+/* ===========================
+   BLOQUE GENERAL EXTRAS
+   =========================== */
+
 .extras-wrapper {
   margin-top: 18px;
   border: 1px solid #e7e7e7;
@@ -34,7 +37,7 @@
   display: none;
 }
 
-/* Flecha */
+/* Flecha del desplegable general */
 .extras-toggle::after {
   content: "▾";
   float: right;
@@ -42,11 +45,15 @@
   opacity: 0.7;
   transition: transform 0.15s ease;
 }
+
 .extras-wrapper[open] .extras-toggle::after {
   transform: rotate(180deg);
 }
 
-/* Grid de categorías */
+/* ===========================
+   GRID DE CATEGORÍAS
+   =========================== */
+
 .extras-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -55,7 +62,10 @@
   padding-bottom: 6px;
 }
 
-/* ----- Tarjeta por categoría ----- */
+/* ===========================
+   TARJETA POR CATEGORÍA
+   =========================== */
+
 .extra-group {
   border: 1px solid #ececec;
   border-radius: 14px;
@@ -64,11 +74,11 @@
   box-shadow: 0 1px 8px rgba(0,0,0,0.04);
 }
 
-/* Header categoría */
+/* Cabecera categoría */
 .extra-group > summary {
   cursor: pointer;
   font-weight: 800;
-  padding: 12px 12px;
+  padding: 12px;
   list-style: none;
   display: flex;
   align-items: center;
@@ -87,11 +97,15 @@
   opacity: 0.6;
   transition: transform 0.15s ease;
 }
+
 .extra-group[open] > summary::after {
   transform: rotate(180deg);
 }
 
-/* Cuerpo opciones */
+/* ===========================
+   LISTA DE OPCIONES
+   =========================== */
+
 .extra-list {
   display: grid;
   gap: 10px;
@@ -99,40 +113,74 @@
   border-top: 1px solid #f0f0f0;
 }
 
-/* ----- Opción (alineación pro) ----- */
+/* ===========================
+   OPCIÓN (SIN RADIO VISIBLE)
+   =========================== */
+
 .extra-option {
+  position: relative;
   display: grid;
-  grid-template-columns: 20px 1fr auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: 10px;
-  padding: 10px 10px;
+  padding: 12px;
   border: 1px solid #ededed;
   border-radius: 12px;
   background: #fafafa;
   cursor: pointer;
-  transition: transform 0.06s ease, border-color 0.12s ease, background 0.12s ease;
+  transition: transform 0.06s ease,
+              border-color 0.12s ease,
+              background 0.12s ease,
+              box-shadow 0.12s ease;
 }
 
+/* Hover */
 .extra-option:hover {
   transform: translateY(-1px);
   border-color: #dcdcdc;
   background: #ffffff;
 }
 
-.extra-option input[type="radio"] {
-  margin: 0;
-  transform: translateY(1px);
+/* Ocultar radio */
+.extra-option input[type="radio"]{
+  appearance: none;
+  -webkit-appearance: none;
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
 }
 
+/* Nombre */
 .extra-option-name {
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.2;
 }
 
+/* Precio */
 .extra-option-price {
   font-weight: 800;
   opacity: 0.85;
   white-space: nowrap;
+}
+
+/* ===========================
+   OPCIÓN SELECCIONADA
+   =========================== */
+
+.extra-option:has(input[type="radio"]:checked){
+  border-color: #9dbfb2;
+  background: #ffffff;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.08);
+}
+
+/* Check visual */
+.extra-option:has(input[type="radio"]:checked)::after{
+  content: "✓";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-weight: 900;
+  opacity: 0.75;
 }
 
 /* Opción "Ninguna" */
@@ -142,7 +190,15 @@
   opacity: 0.95;
 }
 
-/* Mensajes */
+.extra-option--none:has(input[type="radio"]:checked){
+  border-style: solid;
+  opacity: 1;
+}
+
+/* ===========================
+   MENSAJES
+   =========================== */
+
 #budgetMsg {
   margin-top: 14px;
   font-weight: 800;
@@ -152,7 +208,10 @@
 .msg-success { color: #1f7a3a; }
 .msg-error { color: #b3002d; }
 
-/* Resultado */
+/* ===========================
+   RESULTADO PRESUPUESTO
+   =========================== */
+
 .budget-card {
   margin-top: 10px;
   border: 1px solid #ececec;
@@ -171,3 +230,4 @@
 .budget-total {
   font-size: 1.15rem;
 }
+

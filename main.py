@@ -31,8 +31,21 @@ MODELOS = [
         "nombre": "Contenedor Minimalista",
         "m2": 45,
         "precio_base": 64000
+    },
+    {
+        "id": 3,
+        "nombre": "Casa Familiar Moderna",
+        "m2": 90,
+        "precio_base": 118000
+    },
+    {
+        "id": 4,
+        "nombre": "Casa Modular Premium",
+        "m2": 120,
+        "precio_base": 165000
     }
 ]
+
 
 # ----------------------------
 # OPCIONES / EXTRAS (DATOS)

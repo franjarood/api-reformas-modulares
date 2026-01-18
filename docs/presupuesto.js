@@ -7,7 +7,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   const budgetMsg = document.getElementById("budgetMsg");
   const budgetResult = document.getElementById("budgetResult");
 
-  if (!modeloSelect || !extrasContainer || !btnCalcular || !budgetMsg || !budgetResult) return;
+  // Nuevos campos
+  const emailInput = document.getElementById("emailInput");
+  const phoneInput = document.getElementById("phoneInput");
+  const budgetUserInput = document.getElementById("budgetUserInput");
+
+  if (
+    !modeloSelect || !extrasContainer || !btnCalcular || !budgetMsg || !budgetResult ||
+    !emailInput || !phoneInput || !budgetUserInput
+  ) return;
 
   const setMsg = (text, type = "") => {
     budgetMsg.textContent = text || "";
@@ -40,7 +48,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       const list = document.createElement("div");
       list.className = "extra-list";
 
-      // Ninguna
       const none = document.createElement("label");
       none.className = "extra-option extra-option--none";
       none.innerHTML = `
@@ -50,7 +57,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       `;
       list.appendChild(none);
 
-      // Opciones
       items.forEach((o) => {
         const label = document.createElement("label");
         label.className = "extra-option";
@@ -76,14 +82,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     return ids;
   };
 
-  const renderBudget = (data) => {
+  const renderBudget = (data, presupuestoEstimadoCliente) => {
     const { precio_base, precio_extras, total_estimado } = data.desglose;
+
+    const extraCliente = (presupuestoEstimadoCliente !== null && !Number.isNaN(presupuestoEstimadoCliente))
+      ? `<div><strong>Presupuesto estimado (cliente):</strong> ${presupuestoEstimadoCliente.toLocaleString("es-ES")}€</div>`
+      : "";
 
     budgetResult.innerHTML = `
       <div class="budget-card">
         <div><strong>Modelo:</strong> ${data.modelo.nombre}</div>
         <div><strong>Base:</strong> ${Number(precio_base).toLocaleString()}€</div>
         <div><strong>Extras:</strong> ${Number(precio_extras).toLocaleString()}€</div>
+        ${extraCliente}
         <hr>
         <div class="budget-total"><strong>Total estimado:</strong> ${Number(total_estimado).toLocaleString()}€</div>
       </div>
@@ -93,7 +104,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     setMsg("Cargando modelos y extras...", "msg-info");
 
-    // Modelos
     const modelsRes = await fetch(`${API_BASE_URL}/models`);
     if (!modelsRes.ok) throw new Error("No se pudieron cargar los modelos");
     const models = await modelsRes.json();
@@ -105,7 +115,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       )
       .join("");
 
-    // Extras
     const optRes = await fetch(`${API_BASE_URL}/options`);
     if (!optRes.ok) throw new Error("No se pudieron cargar los extras");
     const options = await optRes.json();
@@ -113,10 +122,28 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderExtras(options);
     setMsg("", "");
 
-    // Calcular
     btnCalcular.addEventListener("click", async () => {
       budgetResult.innerHTML = "";
       setMsg("", "");
+
+      // Validación email
+      if (!emailInput.checkValidity()) {
+        setMsg("❌ Email no válido", "msg-error");
+        emailInput.reportValidity();
+        return;
+      }
+
+      // Validación teléfono
+      if (!phoneInput.checkValidity()) {
+        setMsg("❌ Teléfono no válido", "msg-error");
+        phoneInput.reportValidity();
+        return;
+      }
+
+      // Presupuesto estimado (opcional, decimales OK, coma o punto)
+      const presupuestoEstimadoCliente = budgetUserInput.value
+        ? Number(String(budgetUserInput.value).replace(",", "."))
+        : null;
 
       const modelo_id = Number(modeloSelect.value);
       const option_ids = getSelectedOptionIds();
@@ -135,7 +162,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!res.ok) throw new Error(data.detail || "Error calculando presupuesto");
 
         setMsg("Presupuesto calculado", "msg-success");
-        renderBudget(data);
+        renderBudget(data, presupuestoEstimadoCliente);
         budgetMsg.scrollIntoView({ behavior: "smooth", block: "center" });
       } catch (e) {
         setMsg("❌ " + e.message, "msg-error");
@@ -149,5 +176,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error(e);
   }
 });
+
 
 

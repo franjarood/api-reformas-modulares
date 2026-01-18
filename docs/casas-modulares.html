@@ -104,7 +104,7 @@
         <label for="modeloSelect"><strong>Modelo</strong></label>
         <select id="modeloSelect"></select>
 
-        <!-- EXTRAS (desplegable general) -->
+        <!-- EXTRAS -->
         <details open class="extras-wrapper">
           <summary class="extras-toggle">Extras</summary>
 
@@ -112,6 +112,34 @@
             <div id="extrasContainer" class="extras-grid"></div>
           </div>
         </details>
+
+        <!-- VALIDACIONES -->
+        <label for="emailInput"><strong>Email</strong></label>
+        <input
+          id="emailInput"
+          type="email"
+          required
+          placeholder="tuemail@dominio.com"
+        />
+
+        <label for="phoneInput"><strong>Teléfono</strong></label>
+        <input
+          id="phoneInput"
+          type="tel"
+          required
+          placeholder="600123123"
+          pattern="^(\+34\s?)?[6-9]\d{8}$"
+          title="Introduce un teléfono válido (España). Ej: 600123123"
+        />
+
+        <label for="budgetUserInput"><strong>Presupuesto estimado (opcional)</strong></label>
+        <input
+          id="budgetUserInput"
+          type="number"
+          step="0.01"
+          inputmode="decimal"
+          placeholder="Ej: 120000.50"
+        />
 
         <input type="button" id="btnCalcular" value="Calcular presupuesto" />
 

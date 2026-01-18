@@ -1,66 +1,29 @@
-<!-- ===============================================================
-     PROYECTO: Empresa de Reformas y Casas Modulares
-     ARCHIVO: contacto.html
-     DESCRIPCIÓN:
-       Página de contacto con formulario estructurado y accesible.
-       Permite a los usuarios enviar consultas o solicitudes de presupuesto.
-
-     OBJETIVOS:
-       - Recoger datos personales y preferencias de contacto.
-       - Demostrar uso avanzado de formularios HTML5 (inputs, selects,
-         fieldsets, radio, checkbox).
-       - Mantener coherencia visual con los temas de color del sitio.
-
-     TECNOLOGÍAS:
-       - HTML5 semántico
-       - CSS externo: estilos-unificado.css
-================================================================ -->
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- Metadatos básicos -->
   <meta charset="UTF-8" />
   <title>Formulario de contacto - Reformas y Casas Modulares</title>
 
-  <!-- Hoja de estilos global -->
   <link href="estilos-unificado.css" rel="stylesheet" />
-
-  <!-- Tipografía principal -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
 
-<!-- ===============================================================
-     CLASE DE TEMA:
-     "tema-contacto" aplica la paleta lila definida en el CSS.
-================================================================ -->
 <body class="tema-contacto">
 
-  <!-- ===============================================================
-       HEADER / NAVBAR
-       ---------------------------------------------------------------
-       Misma barra de navegación que en las otras páginas, para
-       mantener consistencia visual y navegación uniforme.
-  =============================================================== -->
   <header class="navbar">
     <div class="logo">
-      <!-- Imagen corporativa -->
-      <img src="https://www.freepnglogos.com/uploads/logo-home-png/logo-lake-county-home-show-april-lake-county-24.png" 
+      <img src="https://www.freepnglogos.com/uploads/logo-home-png/logo-lake-county-home-show-april-lake-county-24.png"
            alt="Logo de la empresa" />
       <span>Reformas y Casas Modulares</span>
     </div>
 
-    <!-- Menú principal -->
     <ul class="nav-menu">
       <li><a href="index.html">Inicio</a></li>
 
-      <!-- Dropdown del apartado Reformas -->
       <li class="dropdown">
-        <!-- Checkbox oculto que controla el menú desplegable -->
         <input type="checkbox" id="toggle-reformas" hidden>
         <label for="toggle-reformas" class="dropbtn">Reformas</label>
 
-        <!-- Submenú con anclas -->
         <ul class="dropdown-content">
           <li><a href="reformas.html#cocinas">Cocinas</a></li>
           <li><a href="reformas.html#banos">Baños</a></li>
@@ -69,64 +32,40 @@
         </ul>
       </li>
 
-      <!-- Enlace a la página de casas modulares -->
       <li><a href="casas-modulares.html">Casas modulares</a></li>
     </ul>
   </header>
 
-  <!-- ===============================================================
-       MAIN: FORMULARIO DE CONTACTO
-       ---------------------------------------------------------------
-       Estructurado con fieldsets y legend para mejorar la accesibilidad.
-       Todos los campos están correctamente etiquetados con <label for="">
-       y asociados a sus controles.
-  =============================================================== -->
   <main class="container">
     <section class="contacto">
       <h2>Formulario de contacto</h2>
       <p>
-        ¿Tienes un proyecto en mente o necesitas más información? 
+        ¿Tienes un proyecto en mente o necesitas más información?
         Completa el formulario y te responderemos lo antes posible.
       </p>
 
+      <!-- FORMULARIO -->
+      <form id="contactForm" action="#" method="post" class="form-contacto" novalidate>
 
-
-      <!-- ===============================================================
-           FORMULARIO PRINCIPAL
-           ---------------------------------------------------------------
-           - Se utiliza el método POST (simulado, ya que action="#")
-           - El formulario está dividido en tres bloques temáticos:
-             1. Datos personales
-             2. Información del proyecto
-             3. Preferencias de contacto
-      =============================================================== -->
-      <form action="#" method="post" class="form-contacto">
-
-        <!-- ==================== BLOQUE 1: DATOS PERSONALES ==================== -->
         <fieldset>
           <legend>Datos personales</legend>
 
-          <!-- Campo de nombre completo -->
           <label for="nombre">Nombre completo:</label>
-          <input type="text" id="nombre" name="nombre" 
+          <input type="text" id="nombre" name="nombre"
                  placeholder="Tu nombre y apellidos" required />
 
-          <!-- Campo de correo electrónico -->
           <label for="email">Correo electrónico:</label>
-          <input type="email" id="email" name="email" 
+          <input type="email" id="email" name="email"
                  placeholder="tucorreo@ejemplo.com" required />
 
-          <!-- Campo de teléfono -->
           <label for="telefono">Teléfono:</label>
-          <input type="tel" id="telefono" name="telefono" 
-                 placeholder="+34 600 123 456" required />
+          <input type="tel" id="telefono" name="telefono"
+                 placeholder="+34 600 123 456" inputmode="tel" required />
         </fieldset>
 
-        <!-- ==================== BLOQUE 2: INFORMACIÓN DEL PROYECTO ==================== -->
         <fieldset>
           <legend>Información del proyecto</legend>
 
-          <!-- Desplegable del tipo de proyecto -->
           <label for="tipo">Tipo de proyecto:</label>
           <select id="tipo" name="tipo" required>
             <option value="">Selecciona una opción...</option>
@@ -136,24 +75,25 @@
             <option value="otro">Otro</option>
           </select>
 
-          <!-- Presupuesto estimado con validación de rango -->
+          <!-- CAMBIO: permite decimales / coma / punto sin bloquear -->
           <label for="presupuesto">Presupuesto estimado (€):</label>
-          <input type="number" id="presupuesto" name="presupuesto" 
-                 min="1000" max="1000000" step="500" 
-                 placeholder="Ej. 60000" />
+          <input
+            type="text"
+            id="presupuesto"
+            name="presupuesto"
+            inputmode="decimal"
+            placeholder="Ej. 60000,50"
+          />
 
-          <!-- Descripción libre del proyecto -->
           <label for="mensaje">Descripción del proyecto:</label>
-          <textarea id="mensaje" name="mensaje" rows="5" 
-                    placeholder="Describe brevemente tu proyecto, ubicación o ideas..." 
+          <textarea id="mensaje" name="mensaje" rows="5"
+                    placeholder="Describe brevemente tu proyecto, ubicación o ideas..."
                     required></textarea>
         </fieldset>
 
-        <!-- ==================== BLOQUE 3: PREFERENCIAS DE CONTACTO ==================== -->
         <fieldset>
           <legend>Preferencias de contacto</legend>
 
-          <!-- Desplegable para conocer el canal de captación -->
           <label for="conociste">¿Cómo nos conociste?</label>
           <select id="conociste" name="conociste">
             <option value="">Selecciona una opción...</option>
@@ -164,44 +104,31 @@
             <option value="otro">Otro</option>
           </select>
 
-          <!-- Radios de preferencia (solo una opción posible) -->
           <label>Preferencia de contacto:</label>
           <div class="opciones-contacto">
             <label><input type="radio" name="preferencia" value="email" checked /> Correo electrónico</label>
             <label><input type="radio" name="preferencia" value="telefono" /> Teléfono</label>
           </div>
 
-          <!-- Casilla obligatoria de política de privacidad -->
           <label class="checkbox-privacidad">
             <input type="checkbox" required />
             Acepto la <a href="#">política de privacidad</a>.
           </label>
         </fieldset>
 
-
-         <!-- ==================== BOTÓN DE ENVÍO ==================== -->
         <input type="submit" value="Enviar solicitud" />
-        <p id="formMsg" style="margin: 15px 0; font-weight:600;">
-        </p>
+        <p id="formMsg" style="margin: 15px 0; font-weight:600;"></p>
 
       </form>
     </section>
   </main>
 
-  <!-- ===============================================================
-       FOOTER / PIE DE PÁGINA
-       ---------------------------------------------------------------
-       Pie con estilo coherente con el resto del sitio. 
-       Incluye año actual y nombre comercial.
-  =============================================================== -->
   <footer>
     <p>© 2025 Reformas y Casas Modulares · Todos los derechos reservados</p>
   </footer>
 
-
-<script src="config.js"></script>
-<script src="contacto.js"></script>
-
-
+  <script src="config.js"></script>
+  <script src="contacto.js"></script>
 </body>
 </html>
+

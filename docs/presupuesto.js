@@ -128,14 +128,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       // Validación email
       if (!emailInput.checkValidity()) {
-        setMsg("❌ Email no válido", "msg-error");
+        setMsg("Email no válido", "msg-error");
         emailInput.reportValidity();
         return;
       }
 
       // Validación teléfono
       if (!phoneInput.checkValidity()) {
-        setMsg("❌ Teléfono no válido", "msg-error");
+        setMsg("Teléfono no válido", "msg-error");
         phoneInput.reportValidity();
         return;
       }

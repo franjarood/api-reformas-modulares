@@ -4,12 +4,17 @@
   <meta charset="UTF-8" />
   <title>Casas Modulares | ReformasModulares</title>
 
+  <!-- Estilos globales -->
   <link href="estilos-unificado.css" rel="stylesheet" />
+  <!-- Estilos del simulador -->
+  <link href="presupuesto.css" rel="stylesheet" />
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
 
 <body class="tema-casas">
 
+  <!-- HEADER -->
   <header class="navbar">
     <div class="logo">
       <img src="https://www.freepnglogos.com/uploads/logo-home-png/logo-lake-county-home-show-april-lake-county-24.png"
@@ -35,8 +40,10 @@
     </ul>
   </header>
 
+  <!-- MAIN -->
   <main class="container">
 
+    <!-- HERO -->
     <section class="hero hero-casas">
       <h1>Tu hogar modular, ecológico y a medida</h1>
       <p>Fabricamos casas modulares sostenibles, eficientes y con un diseño moderno.</p>
@@ -91,33 +98,30 @@
       <h2>Simulador rápido de presupuesto</h2>
       <p>Elige un modelo y algunos extras para calcular un presupuesto aproximado.</p>
 
-      <div class="form-contacto" style="max-width: 900px;">
+      <div class="form-contacto simulador">
         <label for="modeloSelect"><strong>Modelo</strong></label>
         <select id="modeloSelect"></select>
 
-        <div style="margin-top:20px;">
-          <strong>Extras</strong>
+        <!-- EXTRAS -->
+        <details open class="extras-wrapper">
+          <summary class="extras-toggle">Extras</summary>
 
-          <div id="extrasBox"
-               style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-                      gap:12px; margin-top:12px;">
-            <!-- NUEVO CONTENEDOR PARA DESPLEGABLES POR CATEGORÍA -->
-            <div id="extrasContainer"></div>
+          <div id="extrasBox">
+            <div id="extrasContainer" class="extras-grid"></div>
           </div>
-        </div>
+        </details>
 
-        <input type="button" id="btnCalcular"
-               value="Calcular presupuesto"
-               style="margin-top:20px;" />
+        <input type="button" id="btnCalcular" value="Calcular presupuesto" />
 
-        <p id="budgetMsg" style="margin-top:15px; font-weight:700;"></p>
-        <div id="budgetResult" style="margin-top:10px;"></div>
+        <p id="budgetMsg"></p>
+        <div id="budgetResult"></div>
       </div>
     </section>
 
     <!-- GALERÍA -->
     <section class="galeria-casas" id="galeria">
       <h2>Galería de proyectos</h2>
+
       <div class="galeria-grid">
         <a href="#img1"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"></a>
         <a href="#img2"><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80"></a>
@@ -127,6 +131,7 @@
 
   </main>
 
+  <!-- FOOTER -->
   <footer>
     <p>
       Contacto:
@@ -135,9 +140,11 @@
     </p>
   </footer>
 
+  <!-- JS -->
   <script src="config.js"></script>
   <script src="presupuesto.js"></script>
 
 </body>
 </html>
+
 

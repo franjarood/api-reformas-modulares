@@ -2,21 +2,20 @@ const API_BASE_URL = (window.API_BASE_URL || "http://127.0.0.1:8000").replace(/\
 
 document.addEventListener("DOMContentLoaded", async () => {
   const modeloSelect = document.getElementById("modeloSelect");
-  const extrasBox = document.getElementById("extrasBox");
-  const extrasContainer = document.getElementById("extrasContainer"); // NUEVO
+  const extrasContainer = document.getElementById("extrasContainer");
   const btnCalcular = document.getElementById("btnCalcular");
   const budgetMsg = document.getElementById("budgetMsg");
   const budgetResult = document.getElementById("budgetResult");
 
   // Si no estamos en la página correcta, salimos sin romper nada
-  if (!modeloSelect || !extrasBox || !extrasContainer || !btnCalcular) return;
+  if (!modeloSelect || !extrasContainer || !btnCalcular || !budgetMsg || !budgetResult) return;
 
-  const setMsg = (text, color) => {
+  const setMsg = (text, type = "") => {
     budgetMsg.textContent = text || "";
-    budgetMsg.style.color = color || "";
+    budgetMsg.className = ""; // limpia clases
+    if (type) budgetMsg.classList.add(type); // "msg-success" | "msg-error" | "msg-info"
   };
 
-  // Agrupar por categoria
   const groupByCategory = (options) => {
     return options.reduce((acc, o) => {
       const cat = o.categoria || "OTROS";
@@ -26,59 +25,134 @@ document.addEventListener("DOMContentLoaded", async () => {
     }, {});
   };
 
-  // Pintar extras por categoria en desplegables con radios (1 eleccion)
   const renderExtras = (options) => {
     const grouped = groupByCategory(options);
     extrasContainer.innerHTML = "";
 
     Object.entries(grouped).forEach(([cat, items]) => {
       const details = document.createElement("details");
-      details.style.border = "1px solid #ddd";
-      details.style.borderRadius = "12px";
-      details.style.padding = "10px";
-      details.style.background = "#fff";
+      details.className = "extra-group";
+      details.open = true;
 
       const summary = document.createElement("summary");
       summary.textContent = cat;
-      summary.style.cursor = "pointer";
-      summary.style.fontWeight = "700";
-      summary.style.listStyle = "none";
       details.appendChild(summary);
 
       const list = document.createElement("div");
-      list.style.display = "grid";
-      list.style.gap = "10px";
-      list.style.marginTop = "12px";
+      list.className = "extra-list";
 
-      // Opcion "Ninguna" para esa categoria
-      list.insertAdjacentHTML(
-        "beforeend",
-        `
-        <label style="display:flex; gap:10px; align-items:flex-start; padding:10px; border:1px solid #eee; border-radius:10px; background:#fafafa;">
-          <input type="radio" name="extra_${cat}" value="" style="margin-top:4px;" checked />
-          <span>
-            <div style="font-weight:700;">Ninguna</div>
-            <div style="opacity:0.85;">No añadir extra en ${cat}</div>
-          </span>
-        </label>
-        `
-      );
+      // Opción "Ninguna"
+      const none = document.createElement("label");
+      none.className = "extra-option extra-option--none";
+      none.innerHTML = `
+        <input type="radio" name="extra_${cat}" value="" checked>
+        <span class="extra-option-name">Ninguna</span>
+        <span class="extra-option-price"></span>
+      `;
+      list.appendChild(none);
 
-      // Opciones reales (radios con el mismo name por categoria)
+      // Opciones reales (radio => solo 1 por categoría)
       items.forEach((o) => {
-        list.insertAdjacentHTML(
-          "beforeend",
-          `
-          <label style="display:flex; gap:10px; align-items:flex-start; padding:10px; border:1px solid #ddd; border-radius:10px; background:#fff;">
-            <input type="radio" name="extra_${cat}" value="${o.id}" style="margin-top:4px;" />
-            <span>
-              <div style="font-weight:700;">${o.nombre}</div>
-              <div style="opacity:0.85;">+ ${Number(o.precio).toLocaleString()}€</div>
-            </span>
-          </label>
-          `
-        );
+        const label = document.createElement("label");
+        label.className = "extra-option";
+        label.innerHTML = `
+          <input type="radio" name="extra_${cat}" value="${o.id}">
+          <span class="extra-option-name">${o.nombre}</span>
+          <span class="extra-option-price">+ ${Number(o.precio).toLocaleString()}€</span>
+        `;
+        list.appendChild(label);
       });
+
+      details.appendChild(list);
+      extrasContainer.appendChild(details);
+    });
+  };
+
+  const getSelectedOptionIds = () => {
+    // Solo radios seleccionados dentro del contenedor
+    const radios = extrasContainer.querySelectorAll('input[type="radio"]:checked');
+    const ids = [];
+    radios.forEach((r) => {
+      if (r.value) ids.push(Number(r.value)); // ignora "Ninguna" (value="")
+    });
+    return ids;
+  };
+
+  const renderBudget = (data) => {
+    const { precio_base, precio_extras, total_estimado } = data.desglose;
+
+    budgetResult.innerHTML = `
+      <div class="budget-card">
+        <div><strong>Modelo:</strong> ${data.modelo.nombre}</div>
+        <div><strong>Base:</strong> ${Number(precio_base).toLocaleString()}€</div>
+        <div><strong>Extras:</strong> ${Number(precio_extras).toLocaleString()}€</div>
+        <hr>
+        <div class="budget-total"><strong>Total estimado:</strong> ${Number(total_estimado).toLocaleString()}€</div>
+      </div>
+    `;
+  };
+
+  try {
+    setMsg("Cargando modelos y extras...", "msg-info");
+
+    // 1) Modelos
+    const modelsRes = await fetch(`${API_BASE_URL}/models`);
+    if (!modelsRes.ok) throw new Error("No se pudieron cargar los modelos");
+    const models = await modelsRes.json();
+
+    modeloSelect.innerHTML = models
+      .map(
+        (m) =>
+          `<option value="${m.id}">${m.nombre} (${m.m2} m²) - ${Number(m.precio_base).toLocaleString()}€</option>`
+      )
+      .join("");
+
+    // 2) Extras
+    const optRes = await fetch(`${API_BASE_URL}/options`);
+    if (!optRes.ok) throw new Error("No se pudieron cargar los extras");
+    const options = await optRes.json();
+
+    renderExtras(options);
+    setMsg("", "");
+
+    // 3) Calcular
+    btnCalcular.addEventListener("click", async () => {
+      budgetResult.innerHTML = "";
+      setMsg("", "");
+
+      const modelo_id = Number(modeloSelect.value);
+      const option_ids = getSelectedOptionIds();
+
+      btnCalcular.disabled = true;
+      btnCalcular.value = "Calculando...";
+
+      try {
+        const res = await fetch(`${API_BASE_URL}/configurations/calculate`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ modelo_id, option_ids }),
+        });
+
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.detail || "Error calculando presupuesto");
+
+        setMsg("Presupuesto calculado", "msg-success");
+        renderBudget(data);
+        budgetMsg.scrollIntoView({ behavior: "smooth", block: "center" });
+      } catch (e) {
+        setMsg("❌ " + e.message, "msg-error");
+      } finally {
+        btnCalcular.disabled = false;
+        btnCalcular.value = "Calcular presupuesto";
+      }
+    });
+  } catch (e) {
+    setMsg("No se pudieron cargar datos desde la API.", "msg-error");
+    console.error(e);
+  }
+});
+
+
 
       details.appendChild(list);
       extrasContainer.appendChild(details);

@@ -1,0 +1,80 @@
+/* ===========================
+   SIMULADOR PRESUPUESTO
+   =========================== */
+
+.extras-toggle {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.extras-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* Cada categoria (FACHADA / VENTANAS / AISLAMIENTO) */
+.extra-group {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 10px;
+  background: #fff;
+}
+
+.extra-group > summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* Lista de opciones dentro de una categoria */
+.extra-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+/* Opcion (radio + nombre + precio alineado) */
+.extra-option {
+  display: grid;
+  grid-template-columns: 22px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.extra-option--none {
+  border-color: #eee;
+  background: #fafafa;
+}
+
+.extra-option-price {
+  opacity: 0.85;
+  font-weight: 600;
+}
+/* Mensajes */
+.msg-info { color: #555; font-weight: 700; margin-top: 15px; }
+.msg-success { color: green; font-weight: 700; margin-top: 15px; }
+.msg-error { color: crimson; font-weight: 700; margin-top: 15px; }
+
+/* Resultado */
+.budget-card {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 10px;
+}
+
+.budget-card hr {
+  margin: 12px 0;
+  border: 0;
+  border-top: 1px solid #eee;
+}
+
+.budget-total {
+  font-size: 1.15rem;
+}

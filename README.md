@@ -60,15 +60,18 @@ Este proyecto está dividido en dos partes:
 ## Estructura del proyecto
 
 <pre>
-/frontend
+/docs
  ├── index.html
- ├── reformas.html
  ├── casas-modulares.html
+ ├── reformas.html
  ├── contacto.html
- └── estilos-unificado.css
+ ├── estilos-unificado.css
+ ├── presupuesto.css
+ ├── config.js
+ ├── presupuesto.js
+ ├── contacto.js
 
-/backend
- └── main.py
+main.py
 </pre>
 
 
@@ -78,6 +81,13 @@ Este proyecto está dividido en dos partes:
 ---
 
 ##  Cómo ejecutar el proyecto
+
+### Opción A (recomendada): Verlo online
+- Web (GitHub Pages): usar el enlace del hosting incluido en la entrega.
+- API (Render): la web ya consume la API desplegada públicamente, por lo que no es necesario ejecutar nada en local.
+
+
+### Opción B: Ejecutar en local
 
 ### Backend (API)
 

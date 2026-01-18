@@ -2,71 +2,164 @@
    SIMULADOR PRESUPUESTO
    =========================== */
 
+.simulador {
+  max-width: 900px;
+}
+
+/* Nota bajo el resultado */
+.budget-note{
+  margin-top: 10px;
+  opacity: 0.8;
+  font-size: 0.95rem;
+}
+
+/* ----- Bloque general "Extras" ----- */
+.extras-wrapper {
+  margin-top: 18px;
+  border: 1px solid #e7e7e7;
+  border-radius: 14px;
+  background: #fff;
+  padding: 10px 12px;
+}
+
 .extras-toggle {
   cursor: pointer;
-  font-weight: 700;
+  font-weight: 800;
+  font-size: 1.02rem;
+  padding: 8px 6px;
+  list-style: none;
 }
 
+.extras-toggle::-webkit-details-marker {
+  display: none;
+}
+
+/* Flecha */
+.extras-toggle::after {
+  content: "▾";
+  float: right;
+  font-weight: 800;
+  opacity: 0.7;
+  transition: transform 0.15s ease;
+}
+.extras-wrapper[open] .extras-toggle::after {
+  transform: rotate(180deg);
+}
+
+/* Grid de categorías */
 .extras-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 12px;
   margin-top: 12px;
+  padding-bottom: 6px;
 }
 
-/* Cada categoria (FACHADA / VENTANAS / AISLAMIENTO) */
+/* ----- Tarjeta por categoría ----- */
 .extra-group {
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 10px;
+  border: 1px solid #ececec;
+  border-radius: 14px;
   background: #fff;
+  overflow: hidden;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.04);
 }
 
+/* Header categoría */
 .extra-group > summary {
   cursor: pointer;
-  font-weight: 700;
+  font-weight: 800;
+  padding: 12px 12px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
 }
 
-/* Lista de opciones dentro de una categoria */
+.extra-group > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Flecha por categoría */
+.extra-group > summary::after {
+  content: "▾";
+  font-weight: 900;
+  opacity: 0.6;
+  transition: transform 0.15s ease;
+}
+.extra-group[open] > summary::after {
+  transform: rotate(180deg);
+}
+
+/* Cuerpo opciones */
 .extra-list {
   display: grid;
   gap: 10px;
-  margin-top: 12px;
+  padding: 10px 12px 12px;
+  border-top: 1px solid #f0f0f0;
 }
 
-/* Opcion (radio + nombre + precio alineado) */
+/* ----- Opción (alineación pro) ----- */
 .extra-option {
   display: grid;
-  grid-template-columns: 22px 1fr auto;
+  grid-template-columns: 20px 1fr auto;
   align-items: center;
   gap: 10px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background: #fff;
+  padding: 10px 10px;
+  border: 1px solid #ededed;
+  border-radius: 12px;
+  background: #fafafa;
+  cursor: pointer;
+  transition: transform 0.06s ease, border-color 0.12s ease, background 0.12s ease;
 }
 
-.extra-option--none {
-  border-color: #eee;
-  background: #fafafa;
+.extra-option:hover {
+  transform: translateY(-1px);
+  border-color: #dcdcdc;
+  background: #ffffff;
+}
+
+.extra-option input[type="radio"] {
+  margin: 0;
+  transform: translateY(1px);
+}
+
+.extra-option-name {
+  font-weight: 700;
+  line-height: 1.1;
 }
 
 .extra-option-price {
+  font-weight: 800;
   opacity: 0.85;
-  font-weight: 600;
+  white-space: nowrap;
 }
+
+/* Opción "Ninguna" */
+.extra-option--none {
+  background: #f6f6f6;
+  border-style: dashed;
+  opacity: 0.95;
+}
+
 /* Mensajes */
-.msg-info { color: #555; font-weight: 700; margin-top: 15px; }
-.msg-success { color: green; font-weight: 700; margin-top: 15px; }
-.msg-error { color: crimson; font-weight: 700; margin-top: 15px; }
+#budgetMsg {
+  margin-top: 14px;
+  font-weight: 800;
+}
+
+.msg-info { color: #555; }
+.msg-success { color: #1f7a3a; }
+.msg-error { color: #b3002d; }
 
 /* Resultado */
 .budget-card {
-  background: #fff;
-  border: 1px solid #e6e6e6;
-  border-radius: 12px;
-  padding: 16px;
   margin-top: 10px;
+  border: 1px solid #ececec;
+  border-radius: 14px;
+  background: #fff;
+  padding: 14px;
+  box-shadow: 0 1px 10px rgba(0,0,0,0.04);
 }
 
 .budget-card hr {

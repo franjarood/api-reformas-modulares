@@ -14,7 +14,6 @@
 
 <body class="tema-casas">
 
-  <!-- HEADER -->
   <header class="navbar">
     <div class="logo">
       <img src="https://www.freepnglogos.com/uploads/logo-home-png/logo-lake-county-home-show-april-lake-county-24.png"
@@ -40,10 +39,8 @@
     </ul>
   </header>
 
-  <!-- MAIN -->
   <main class="container">
 
-    <!-- HERO -->
     <section class="hero hero-casas">
       <h1>Tu hogar modular, ecológico y a medida</h1>
       <p>Fabricamos casas modulares sostenibles, eficientes y con un diseño moderno.</p>
@@ -51,45 +48,50 @@
       <a href="#galeria" class="btn">Descubre nuestra galería</a>
     </section>
 
-    <!-- PROYECTOS -->
     <section id="proyectos" class="proyectos-destacados">
       <div class="proyectos-header">
         <h2>Nuestros proyectos destacados</h2>
-        <p>Diseñamos y construimos espacios modulares con personalidad.</p>
+        <p>Diseñamos y construimos espacios modulares con personalidad, combinando innovación, eficiencia y estilo contemporáneo.</p>
       </div>
 
       <div class="proyectos-grid">
+
         <article class="proyecto-card">
-          <img src="https://anboc.es/wp-content/uploads/2022/10/casa-montcau.jpg" alt="Casa modular ecológica" />
+          <img src="https://anboc.es/wp-content/uploads/2022/10/casa-montcau.jpg"
+               alt="Casa modular ecológica" />
           <div class="proyecto-info">
             <h3>Casa Modular Ecológica</h3>
-            <p>Eficiencia energética y materiales sostenibles.</p>
+            <p>Eficiencia energética y materiales sostenibles para un hogar con huella verde.</p>
           </div>
         </article>
 
         <article class="proyecto-card">
-          <img src="https://premiergreenhome.com/wp-content/uploads/2024/11/Casa-contenedor.jpg" alt="Casa contenedor minimalista" />
+          <img src="https://premiergreenhome.com/wp-content/uploads/2024/11/Casa-contenedor.jpg"
+               alt="Casa contenedor minimalista" />
           <div class="proyecto-info">
             <h3>Contenedor Minimalista</h3>
-            <p>Diseño compacto, funcional y elegante.</p>
+            <p>Diseño compacto, funcional y elegante, ideal para entornos naturales o urbanos.</p>
           </div>
         </article>
 
         <article class="proyecto-card">
-          <img src="https://eurocasas.com/wp-content/uploads/2023/03/slide_gran-villa_2-1024x683.webp" alt="Casa familiar moderna" />
+          <img src="https://eurocasas.com/wp-content/uploads/2023/03/slide_gran-villa_2-1024x683.webp"
+               alt="Casa modular familiar moderna" />
           <div class="proyecto-info">
             <h3>Casa Familiar Moderna</h3>
-            <p>Espacios amplios y modulares.</p>
+            <p>Espacios amplios y modulares que crecen contigo y tu familia.</p>
           </div>
         </article>
 
         <article class="proyecto-card">
-          <img src="https://casasinhaus.com/wp-content/uploads/2021/10/casas-de-lujo-en-espana.jpg" alt="Casa modular premium" />
+          <img src="https://casasinhaus.com/wp-content/uploads/2021/10/casas-de-lujo-en-espana.jpg"
+               alt="Casa modular de lujo con diseño contemporáneo" />
           <div class="proyecto-info">
             <h3>Casa Modular Premium</h3>
-            <p>Arquitectura contemporánea y acabados de lujo.</p>
+            <p>Arquitectura contemporánea, acabados de lujo y tecnología inteligente para una experiencia de confort total.</p>
           </div>
         </article>
+
       </div>
     </section>
 
@@ -102,7 +104,7 @@
         <label for="modeloSelect"><strong>Modelo</strong></label>
         <select id="modeloSelect"></select>
 
-        <!-- EXTRAS -->
+        <!-- EXTRAS (desplegable general) -->
         <details open class="extras-wrapper">
           <summary class="extras-toggle">Extras</summary>
 
@@ -115,36 +117,55 @@
 
         <p id="budgetMsg"></p>
         <div id="budgetResult"></div>
+
+        <p class="budget-note">
+          * Este presupuesto es orientativo. El precio final puede variar según parcela, normativa local y estudio técnico.
+        </p>
       </div>
     </section>
 
     <!-- GALERÍA -->
     <section class="galeria-casas" id="galeria">
       <h2>Galería de proyectos</h2>
+      <p class="galeria-descripcion">
+        Diseños modulares que combinan sostenibilidad, elegancia y tecnología.
+      </p>
 
       <div class="galeria-grid">
-        <a href="#img1"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"></a>
-        <a href="#img2"><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80"></a>
-        <a href="#img3"><img src="https://images.unsplash.com/photo-1572120360610-d971b9d7767c?auto=format&fit=crop&w=800&q=80"></a>
+        <a href="#img1"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Casa modular 1"></a>
+        <a href="#img2"><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80" alt="Casa modular 2"></a>
+        <a href="#img3"><img src="https://images.unsplash.com/photo-1572120360610-d971b9d7767c?auto=format&fit=crop&w=800&q=80" alt="Casa modular 3"></a>
+      </div>
+
+      <div class="lightbox" id="img1">
+        <a href="#" class="cerrar"></a>
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=90" alt="Vista ampliada de casa modular 1" />
+      </div>
+
+      <div class="lightbox" id="img2">
+        <a href="#" class="cerrar"></a>
+        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1400&q=90" alt="Vista ampliada de casa modular 2" />
+      </div>
+
+      <div class="lightbox" id="img3">
+        <a href="#" class="cerrar"></a>
+        <img src="https://images.unsplash.com/photo-1572120360610-d971b9d7767c?auto=format&fit=crop&w=1400&q=90" alt="Vista ampliada de casa modular 3" />
       </div>
     </section>
 
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <p>
       Contacto:
-      <a href="mailto:info@reformasmodulares.com">info@reformasmodulares.com</a>
+      <a href="mailto:info@reformasmodulares.com" style="color:inherit; text-decoration:underline;">
+        info@reformasmodulares.com
+      </a>
       | Tel: 123 456 789
     </p>
   </footer>
 
-  <!-- JS -->
   <script src="config.js"></script>
   <script src="presupuesto.js"></script>
-
 </body>
 </html>
-
-

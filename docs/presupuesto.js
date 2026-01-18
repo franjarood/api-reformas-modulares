@@ -7,13 +7,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   const budgetMsg = document.getElementById("budgetMsg");
   const budgetResult = document.getElementById("budgetResult");
 
-  // Si no estamos en la página correcta, salimos sin romper nada
   if (!modeloSelect || !extrasContainer || !btnCalcular || !budgetMsg || !budgetResult) return;
 
   const setMsg = (text, type = "") => {
     budgetMsg.textContent = text || "";
-    budgetMsg.className = ""; // limpia clases
-    if (type) budgetMsg.classList.add(type); // msg-success | msg-error | msg-info
+    budgetMsg.className = "";
+    if (type) budgetMsg.classList.add(type);
   };
 
   const groupByCategory = (options) => {
@@ -41,7 +40,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const list = document.createElement("div");
       list.className = "extra-list";
 
-      // Opción "Ninguna"
+      // Ninguna
       const none = document.createElement("label");
       none.className = "extra-option extra-option--none";
       none.innerHTML = `
@@ -51,7 +50,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       `;
       list.appendChild(none);
 
-      // Opciones reales (solo 1 por categoría)
+      // Opciones
       items.forEach((o) => {
         const label = document.createElement("label");
         label.className = "extra-option";
@@ -72,7 +71,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const radios = extrasContainer.querySelectorAll('input[type="radio"]:checked');
     const ids = [];
     radios.forEach((r) => {
-      if (r.value) ids.push(Number(r.value)); // ignora "Ninguna"
+      if (r.value) ids.push(Number(r.value));
     });
     return ids;
   };
@@ -94,7 +93,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     setMsg("Cargando modelos y extras...", "msg-info");
 
-    // 1) Modelos
+    // Modelos
     const modelsRes = await fetch(`${API_BASE_URL}/models`);
     if (!modelsRes.ok) throw new Error("No se pudieron cargar los modelos");
     const models = await modelsRes.json();
@@ -106,7 +105,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       )
       .join("");
 
-    // 2) Extras
+    // Extras
     const optRes = await fetch(`${API_BASE_URL}/options`);
     if (!optRes.ok) throw new Error("No se pudieron cargar los extras");
     const options = await optRes.json();
@@ -114,7 +113,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderExtras(options);
     setMsg("", "");
 
-    // 3) Calcular
+    // Calcular
     btnCalcular.addEventListener("click", async () => {
       budgetResult.innerHTML = "";
       setMsg("", "");
@@ -135,7 +134,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const data = await res.json().catch(() => ({}));
         if (!res.ok) throw new Error(data.detail || "Error calculando presupuesto");
 
-        setMsg("✅ Presupuesto calculado", "msg-success");
+        setMsg("Presupuesto calculado", "msg-success");
         renderBudget(data);
         budgetMsg.scrollIntoView({ behavior: "smooth", block: "center" });
       } catch (e) {
@@ -146,7 +145,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
   } catch (e) {
-    setMsg("❌ No se pudieron cargar datos desde la API.", "msg-error");
+    setMsg("No se pudieron cargar datos desde la API.", "msg-error");
     console.error(e);
   }
 });

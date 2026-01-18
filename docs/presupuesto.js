@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const setMsg = (text, type = "") => {
     budgetMsg.textContent = text || "";
     budgetMsg.className = ""; // limpia clases
-    if (type) budgetMsg.classList.add(type); // "msg-success" | "msg-error" | "msg-info"
+    if (type) budgetMsg.classList.add(type); // msg-success | msg-error | msg-info
   };
 
   const groupByCategory = (options) => {
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       `;
       list.appendChild(none);
 
-      // Opciones reales (radio => solo 1 por categoría)
+      // Opciones reales (solo 1 por categoría)
       items.forEach((o) => {
         const label = document.createElement("label");
         label.className = "extra-option";
@@ -69,11 +69,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
 
   const getSelectedOptionIds = () => {
-    // Solo radios seleccionados dentro del contenedor
     const radios = extrasContainer.querySelectorAll('input[type="radio"]:checked');
     const ids = [];
     radios.forEach((r) => {
-      if (r.value) ids.push(Number(r.value)); // ignora "Ninguna" (value="")
+      if (r.value) ids.push(Number(r.value)); // ignora "Ninguna"
     });
     return ids;
   };
@@ -136,7 +135,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const data = await res.json().catch(() => ({}));
         if (!res.ok) throw new Error(data.detail || "Error calculando presupuesto");
 
-        setMsg("Presupuesto calculado", "msg-success");
+        setMsg("✅ Presupuesto calculado", "msg-success");
         renderBudget(data);
         budgetMsg.scrollIntoView({ behavior: "smooth", block: "center" });
       } catch (e) {
@@ -147,105 +146,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
   } catch (e) {
-    setMsg("No se pudieron cargar datos desde la API.", "msg-error");
+    setMsg("❌ No se pudieron cargar datos desde la API.", "msg-error");
     console.error(e);
   }
 });
 
-
-
-      details.appendChild(list);
-      extrasContainer.appendChild(details);
-    });
-  };
-
-  // Recoger 1 option_id por categoria (segun radios seleccionados)
-  const getSelectedOptionIds = () => {
-    const radiosChecked = extrasContainer.querySelectorAll('input[type="radio"]:checked');
-    const ids = [];
-
-    radiosChecked.forEach((r) => {
-      if (r.value) ids.push(Number(r.value)); // ignora "Ninguna" (value="")
-    });
-
-    return ids;
-  };
-
-  try {
-    setMsg("Cargando modelos y extras...", "#555");
-
-    // 1) Cargar modelos
-    const modelsRes = await fetch(`${API_BASE_URL}/models`);
-    if (!modelsRes.ok) throw new Error("No se pudieron cargar los modelos");
-    const models = await modelsRes.json();
-
-    modeloSelect.innerHTML = models
-      .map(
-        (m) =>
-          `<option value="${m.id}">${m.nombre} (${m.m2} m²) - ${Number(m.precio_base).toLocaleString()}€</option>`
-      )
-      .join("");
-
-    // 2) Cargar opciones/extras
-    const optRes = await fetch(`${API_BASE_URL}/options`);
-    if (!optRes.ok) throw new Error("No se pudieron cargar los extras");
-    const options = await optRes.json();
-
-    // Antes pintabas checkboxes en extrasBox; ahora pintamos en extrasContainer
-    renderExtras(options);
-
-    setMsg("", "");
-
-    // 3) Calcular presupuesto
-    btnCalcular.addEventListener("click", async () => {
-      budgetResult.innerHTML = "";
-      setMsg("", "");
-
-      const modelo_id = Number(modeloSelect.value);
-      const option_ids = getSelectedOptionIds();
-
-      btnCalcular.disabled = true;
-      btnCalcular.value = "Calculando...";
-
-      try {
-        // OJO: este es el endpoint real en la API
-        const res = await fetch(`${API_BASE_URL}/configurations/calculate`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ modelo_id, option_ids }),
-        });
-
-        const data = await res.json().catch(() => ({}));
-
-        if (!res.ok) {
-          throw new Error(data.detail || "Error calculando presupuesto");
-        }
-
-        const { precio_base, precio_extras, total_estimado } = data.desglose;
-
-        setMsg("Presupuesto calculado", "green");
-
-        budgetResult.innerHTML = `
-          <div style="background:#fff; border:1px solid #e6e6e6; border-radius:12px; padding:16px;">
-            <div><strong>Modelo:</strong> ${data.modelo.nombre}</div>
-            <div><strong>Base:</strong> ${Number(precio_base).toLocaleString()}€</div>
-            <div><strong>Extras:</strong> ${Number(precio_extras).toLocaleString()}€</div>
-            <hr style="margin:12px 0;">
-            <div style="font-size:1.15rem;"><strong>Total estimado:</strong> ${Number(total_estimado).toLocaleString()}€</div>
-          </div>
-        `;
-
-        budgetMsg.scrollIntoView({ behavior: "smooth", block: "center" });
-      } catch (e) {
-        setMsg("❌ " + e.message, "crimson");
-      } finally {
-        btnCalcular.disabled = false;
-        btnCalcular.value = "Calcular presupuesto";
-      }
-    });
-  } catch (e) {
-    setMsg("No se pudieron cargar datos desde la API.", "crimson");
-    console.error(e);
-  }
-});
 

@@ -247,6 +247,32 @@
       </div>
     </section>
 
+    <section class="bloque-tablas" id="presupuesto">
+  <h2>Simulador rápido de presupuesto</h2>
+  <p>Elige un modelo y algunos extras para calcular un presupuesto aproximado.</p>
+
+  <div class="form-contacto" style="max-width: 900px;">
+    <label for="modeloSelect"><strong>Modelo</strong></label>
+    <select id="modeloSelect"></select>
+
+    <div style="margin-top:20px;">
+      <strong>Extras</strong>
+      <div id="extrasBox"
+           style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                  gap:12px; margin-top:12px;">
+      </div>
+    </div>
+
+    <input type="button" id="btnCalcular"
+           value="Calcular presupuesto"
+           style="margin-top:20px;" />
+
+    <p id="budgetMsg" style="margin-top:15px; font-weight:700;"></p>
+    <div id="budgetResult" style="margin-top:10px;"></div>
+  </div>
+</section>
+
+
     <!-- ===============================================================
          GALERÍA DE IMÁGENES CON LIGHTBOX
          ---------------------------------------------------------------
@@ -300,5 +326,9 @@
       | Tel: 123 456 789
     </p>
   </footer>
+
+  <script src="config.js"></script>
+  <script src="presupuesto.js"></script>
+
 </body>
 </html>
